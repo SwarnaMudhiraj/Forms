@@ -1,0 +1,56 @@
+
+<h1>Reactive Forms</h1>
+<form [formGroup]="login">
+
+First Name: <input type="text"  formControlName="fname"  class="form-control w-50 m-3" required >
+     <div  class="error" *ngIf="login.controls.fname.touched && login. controls.fname.invalid">
+        <small *ngIf="login.controls.fname.errors?.['required']"> User name is required</small>
+         <small *ngIf="login.controls.fname.errors?.['minlength'] "> User name should be min 8 characters length</small>
+         <small *ngIf="login.controls.fname.errors?.['maxlength'] "> User name should not exceed 20 characters length</small>
+     </div>
+     
+     
+last Name: <input type="text"  formControlName="lname"  class="form-control w-50 m-3">
+
+
+Email: <input type="email"  formControlName="email"  class="form-control w-50 m-3" required >
+     <div  class="error" *ngIf="login.controls.email.touched && login. controls.email.invalid">
+        <small *ngIf="login.controls.email.errors?.['required']"> Email  required</small>
+         <small *ngIf="login.controls.email.errors?.['minlength'] "> Email should be min 10 characters length</small>
+         <small *ngIf="login.controls.email.errors?.['maxlength'] "> email  should not exceed 30 characters length</small>
+     </div>
+     
+
+
+Password: <input type="password"  formControlName="password"  class="form-control w-50 m-3" required >
+     <div  class="error" *ngIf="login.controls.password.touched && login. controls.password.invalid">
+        <small *ngIf="login.controls.password.errors?.['required']"> password required</small>
+         <small *ngIf="login.controls.password.errors?.['minlength'] "> password should be min 6 characters length</small>
+     </div>
+     
+Confirm Password: <input type="password"  formControlName="confirm"  class="form-control w-50 m-3" required>
+     <div  class="error" *ngIf="login.controls.confirm.touched && login. controls.confirm.invalid">
+        <!-- <small *ngIf="login.controls.confirm.errors?.['required']">confirm password is required</small> -->
+        <!-- <small  *ngIf="passwordmatch('login.controls.password','login.controls.confirm')"></small> -->
+       <small *ngIf="login.controls.confirm.errors?.['PasswordMatch']">password and confirm password must match</small>
+      
+       <!-- <div *ngIf="login.controls.confirm.errors?.['passwordMismatchError']&&login.controls.confirm.touched ">
+       <small  >confirm password shoud match with password</small>
+       </div> -->
+     </div>
+
+     <div formArrayName="mobiles">
+          <div *ngFor="let m of login.controls.mobiles.controls; let i=index">
+          Mobile {{i}}:<input type="number" formControlName="{{i}}" class="form-control w-50 m-3" required>
+          </div>
+     </div>
+     <button class="btn btn-primary" (click)="addMobile()">Add</button>
+     <br>
+      {{login.controls.confirm.value}}
+          
+    
+
+<button class="btn btn-primary" (click)="show()">Show</button>
+
+
+</form> 
